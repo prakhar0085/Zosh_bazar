@@ -1,0 +1,34 @@
+import { Product } from "./productTypes";
+import { User } from "./userTypes";
+
+export interface Review {
+    _id: number;
+    reviewText: string;
+    rating: number;
+    user: User;
+    product: Product;
+    productImages:string[];
+    createdAt: string;
+    updatedAt: string;
+  }
+  
+  export interface CreateReviewRequest {
+    reviewText: string;
+    rating: number;
+    productImages?: string[];
+  }
+  
+  export interface ApiResponse {
+    message: string;
+    status: boolean;
+  }
+  
+  export interface ReviewState {
+    reviews: Review[];
+    loading: boolean;
+    error: string | null;
+    reviewCreated: boolean;
+    reviewUpdated: boolean;
+    reviewDeleted: boolean;
+  }
+  
