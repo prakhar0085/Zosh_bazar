@@ -73,21 +73,15 @@ app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
+// Connect to MongoDB
+connectDB();
+
 const port = process.env.PORT || 8080;
-app.listen(port, async() => {
-    await connectDB()
-  console.log(`Server is running on port ${port}`);
-});
 
-// Handle uncaught exceptions
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err.message);
-  // Don't exit the process, just log the error
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
 
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  // Don't exit the process, just log the error
-});
-// 
+module.exports = app;
